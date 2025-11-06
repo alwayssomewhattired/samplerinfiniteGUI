@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QString>
 #include <QUrl>
+#include <QList>
 
 class AudioDropWidget : public QWidget
 {
@@ -11,7 +12,6 @@ class AudioDropWidget : public QWidget
 public:
     explicit AudioDropWidget(QWidget *parent = nullptr);
 
-    void paintEvent(QPaintEvent *event) override;
 
 signals:
     void audioDropped(const QString &filePath);
@@ -19,6 +19,9 @@ signals:
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+
+private:
+    QList<QString> files;
 };
 
 #endif // AUDIODROPWIDGET_H

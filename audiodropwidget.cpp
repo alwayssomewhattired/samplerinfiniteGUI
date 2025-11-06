@@ -2,17 +2,20 @@
 #include <QDropEvent>
 #include <QMimeData>
 #include <QDebug>
-#include <QPainter>
-#include <QPaintEvent>
+#include <QLabel>
+#include <QVBoxLayout>
 
 AudioDropWidget::AudioDropWidget(QWidget *parent) : QWidget(parent)
 {
     setAcceptDrops(true);
-    qDebug() << "AudioDropWidget constructed!";
-    setAutoFillBackground(true);
     setAttribute(Qt::WA_StyledBackground, true); // make stylesheets apply
-    setStyleSheet("background-color: rgba(255, 0, 255, 100); border: 2px dashed magenta;");
-}
+
+    auto *layout = new QVBoxLayout(this);
+    QLabel *label = new QLabel("Drop your audio file here", this);
+    label->setAlignment(Qt::AlignCenter);
+    layout->addWidget(label);
+    setLayout(layout);
+    }
 
 void AudioDropWidget::dragEnterEvent(QDragEnterEvent *event)
 {
@@ -40,13 +43,4 @@ void AudioDropWidget::dropEvent(QDropEvent *event)
         qDebug() << "file: " << filePath;
         emit audioDropped(filePath);
     }
-}
-
-void AudioDropWidget::paintEvent(QPaintEvent *event)
-{
-    Q_UNUSED(event);
-    QPainter p(this);
-    p.fillRect(rect(), QColor(255, 0, 255, 50)); // faint magenta overlay
-    p.setPen(QPen(Qt::magenta, 3, Qt::DashLine));
-    p.drawRect(rect().adjusted(1, 1, -1, -1));
 }
