@@ -2,6 +2,8 @@
 #define SAMPLERINFINITE_H
 
 #include <QMainWindow>
+#include <QList>
+#include "frequencies.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -20,5 +22,7 @@ public:
 
 private:
     Ui::SamplerInfinite *ui;
+    Frequencies freqs;
+
 };
 #endif // SAMPLERINFINITE_H

@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         samplerinfinite.ui
         audiodropwidget.cpp
         audiodropwidget.h
+        searchablecombobox.cpp
+        searchablecombobox.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -26,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         audiodropwidget.h audiodropwidget.cpp
+        searchablecombobox.h searchablecombobox.cpp
+        frequencies.h frequencies.cpp
 
 
 

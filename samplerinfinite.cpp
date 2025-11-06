@@ -29,6 +29,8 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
 
         ui->fileBrowser->verticalScrollBar()->setValue(ui->fileBrowser->verticalScrollBar()->maximum());
     });
+
+
 }
 
 SamplerInfinite::~SamplerInfinite()
