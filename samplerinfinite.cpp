@@ -30,6 +30,22 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
         ui->fileBrowser->verticalScrollBar()->setValue(ui->fileBrowser->verticalScrollBar()->maximum());
     });
 
+    auto *freqDisplayWidget = ui->freqDisplay;
+    auto *searchableComboBox = ui->searchablecombobox;
+
+    connect(searchableComboBox, &SearchableComboBox::itemSelected, this, [this, freqDisplayWidget](const QString &text){
+        freqDisplayWidget->setReadOnly(true);
+
+        QTextCharFormat format;
+        format.setForeground(Qt::green);
+
+        QTextCursor cursor(freqDisplayWidget->textCursor());
+        cursor.movePosition(QTextCursor::End);
+        cursor.insertText(text + "\n" + "\n", format);
+
+        freqDisplayWidget->verticalScrollBar()->setValue(freqDisplayWidget->verticalScrollBar()->maximum());
+        // freqDisplayWidget->setText(text);
+    });
 
 }
 
