@@ -1,13 +1,14 @@
 #pragma once
+#include <QList>
 
 namespace Backend {
 	class SamplerInfinite
 	{
 	public:
-		SamplerInfinite();
+        SamplerInfinite();
 		~SamplerInfinite();
 
-        void process();
+        void process(const QString& freqs);
 
 	private:
 		struct Config {

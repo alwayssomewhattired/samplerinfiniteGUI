@@ -15,11 +15,6 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
     ui->fileBrowser->setReadOnly(true);
     ui->fileBrowser->setFrameShape(QFrame::NoFrame);
 
-    auto *startButton = ui->startButton;
-
-    connect(startButton, &QPushButton::clicked, this, [this](){
-        backend.process();
-    });
 
     auto *dropWidget = ui->widget;
 
@@ -42,6 +37,7 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
     connect(searchableComboBox, &SearchableComboBox::itemSelected, this, [this, freqDisplayWidget](const QString &text){
         freqDisplayWidget->setReadOnly(true);
 
+
         QTextCharFormat format;
         format.setForeground(Qt::green);
 
@@ -50,7 +46,14 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
         cursor.insertText(text + "\n" + "\n", format);
 
         freqDisplayWidget->verticalScrollBar()->setValue(freqDisplayWidget->verticalScrollBar()->maximum());
-        // freqDisplayWidget->setText(text);
+    });
+
+    auto *startButton = ui->startButton;
+
+    connect(startButton, &QPushButton::clicked, this, [this, freqDisplayWidget](){
+        // pass frequencies as std::vector<double>
+        // const QList<double>& freqs = m_frequencies.getterFreqs();
+        m_backend.process(freqDisplayWidget->toPlainText());
     });
 
 }

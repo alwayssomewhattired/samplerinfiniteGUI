@@ -23,8 +23,8 @@ public:
 
 private:
     Ui::SamplerInfinite *ui;
-    Frequencies freqs;
-    Backend::SamplerInfinite backend;
+    Frequencies m_frequencies;
+    Backend::SamplerInfinite m_backend;
 
 };
 #endif // SAMPLERINFINITE_H
