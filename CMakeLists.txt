@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         audiodropwidget.h
         searchablecombobox.cpp
         searchablecombobox.h
+        backend/SamplerInfinite.cpp
+        include/SamplerInfinite.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -77,6 +79,11 @@ install(TARGETS SamplerInfiniteGUI
 )
 
 target_include_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# target_link_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+
+# target_link_libraries(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/SamplerInfinite-Backend.lib)
 
 
 if(QT_VERSION_MAJOR EQUAL 6)

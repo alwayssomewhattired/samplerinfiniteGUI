@@ -2,6 +2,7 @@
 #include "./ui_samplerinfinite.h"
 #include "audiodropwidget.h"
 #include <QScrollBar>
+#include "include/SamplerInfinite.h"
 
 
 SamplerInfinite::SamplerInfinite(QWidget *parent)
@@ -14,6 +15,11 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
     ui->fileBrowser->setReadOnly(true);
     ui->fileBrowser->setFrameShape(QFrame::NoFrame);
 
+    auto *startButton = ui->startButton;
+
+    connect(startButton, &QPushButton::clicked, this, [this](){
+        backend.process();
+    });
 
     auto *dropWidget = ui->widget;
 
