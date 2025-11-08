@@ -25,6 +25,7 @@ private:
     Ui::SamplerInfinite *ui;
     Frequencies m_frequencies;
     Backend::SamplerInfinite m_backend;
+    std::vector<std::string> filePaths;
 
 };
 #endif // SAMPLERINFINITE_H

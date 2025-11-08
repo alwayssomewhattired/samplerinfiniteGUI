@@ -28,6 +28,8 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
         cursor.movePosition(QTextCursor::End);
         cursor.insertText(filePath + "\n" + "\n", format);
 
+        filePaths.push_back(filePath.toStdString());
+
         ui->fileBrowser->verticalScrollBar()->setValue(ui->fileBrowser->verticalScrollBar()->maximum());
     });
 
@@ -51,9 +53,8 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
     auto *startButton = ui->startButton;
 
     connect(startButton, &QPushButton::clicked, this, [this, freqDisplayWidget](){
-        // pass frequencies as std::vector<double>
-        // const QList<double>& freqs = m_frequencies.getterFreqs();
-        m_backend.process(freqDisplayWidget->toPlainText());
+        m_backend.process(freqDisplayWidget->toPlainText(), filePaths, m_frequencies.getterNoteToFreq());
+
     });
 
 }

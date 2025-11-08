@@ -32,6 +32,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         audiodropwidget.h audiodropwidget.cpp
         searchablecombobox.h searchablecombobox.cpp
         frequencies.h frequencies.cpp
+        backend/FFTProcessor.cpp
+        include/FFTProcessor.h
+        backend/AudioFileParse.cpp
+        include/AudioFileParse.h
 
 
 
@@ -81,8 +85,10 @@ install(TARGETS SamplerInfiniteGUI
 target_include_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# target_link_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+target_link_directories(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
+target_link_libraries(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/fftw3.lib)
+target_link_libraries(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/sndfile.lib)
 # target_link_libraries(SamplerInfiniteGUI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/SamplerInfinite-Backend.lib)
 
 

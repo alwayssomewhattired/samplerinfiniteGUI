@@ -1,5 +1,6 @@
 #pragma once
 #include <QList>
+#include <map>
 
 namespace Backend {
 	class SamplerInfinite
@@ -8,7 +9,7 @@ namespace Backend {
         SamplerInfinite();
 		~SamplerInfinite();
 
-        void process(const QString& freqs);
+        void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap);
 
 	private:
 		struct Config {
