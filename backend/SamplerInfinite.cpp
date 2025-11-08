@@ -71,8 +71,6 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         parser.readAudioFileAsMono(song);
 
-
-
         // make a size member
         int n = parser.size();
 
@@ -84,7 +82,10 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         const auto& chunks = fftProcessor.getMagnitudes();
         const std::vector<double>& audioCopy = parser.getAudioData();
+
+        parser.writeWavFile(fftProcessor.getSampleStorage()[0], "hahamuthafuckah.wav");
     }
+
     qDebug("FINISHED!");
 
 }
