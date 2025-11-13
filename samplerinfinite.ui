@@ -151,8 +151,8 @@ set-color: rgb(0, 0, 0)</string>
    <widget class="QWidget" name="widget_6" native="true">
     <property name="geometry">
      <rect>
-      <x>1170</x>
-      <y>350</y>
+      <x>1230</x>
+      <y>340</y>
       <width>111</width>
       <height>71</height>
      </rect>
@@ -169,11 +169,97 @@ set-color: rgb(0, 0, 0)</string>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
        <widget class="QPushButton" name="startButton">
+        <property name="font">
+         <font>
+          <family>Viner Hand ITC</family>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(0, 170, 0)</string>
+         <string notr="true">background-color: rgb(0, 170, 0);
+color: rgb(0, 0, 0)</string>
         </property>
         <property name="text">
          <string>Start</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="freqStrengthBase" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1190</x>
+      <y>550</y>
+      <width>261</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>261</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6"/>
+    </widget>
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>259</width>
+       <height>11</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 255, 0)
+</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="freqStrengthLabelBase" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1250</x>
+      <y>500</y>
+      <width>120</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Viner Hand ITC</family>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(0, 255, 0)</string>
+        </property>
+        <property name="text">
+         <string>Freq Strength</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>

@@ -15,7 +15,6 @@ Backend::SamplerInfinite::SamplerInfinite()
       }
 
 {
-    qDebug("oh yeah ! ! !\n");
 
 };
 
@@ -36,13 +35,9 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
     {
 
         std::string slicedFreq = freqsStr.substr(start, end - start);
-        qDebug("Before at");
         parts.push_back(freqMap.at(slicedFreq));
-        qDebug("After at");
-        // this passes
 
         start = end + 2;
-        qDebug("joe shmo");
 
     }
     qDebug("Arvjrifrjihrfiuht");
@@ -81,9 +76,14 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
         fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false);
 
         const auto& chunks = fftProcessor.getMagnitudes();
+
+        // wtf do i do with you??? vvv
         const std::vector<double>& audioCopy = parser.getAudioData();
 
-        parser.writeWavFile(fftProcessor.getSampleStorage()[0], "hahamuthafuckah.wav");
+        qDebug() << "sample storage size: " << fftProcessor.getSampleStorage()[0].size() << "\n";
+        for (auto& [k, v] : fftProcessor.getSampleStorage()) {
+            parser.writeWavFile(v, "hahamuthafuckah.wav");
+        }
     }
 
     qDebug("FINISHED!");
