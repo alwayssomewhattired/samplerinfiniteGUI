@@ -9,9 +9,12 @@ namespace Backend {
         SamplerInfinite();
 		~SamplerInfinite();
 
-        void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap);
+        void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
+            const std::map<double, std::string>& freqToNote);
 
         void setFreqStrength(double freqStrength);
+
+        void setOutputDirectory(std::string outputDirectory);
 
 	private:
 		struct Config {
@@ -23,5 +26,6 @@ namespace Backend {
 		Config config;
 
         double m_freqStrength;
+        std::string m_outputDirectory;
 	};
 }

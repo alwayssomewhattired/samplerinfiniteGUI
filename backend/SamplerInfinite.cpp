@@ -1,9 +1,11 @@
 
 #include "include/SamplerInfinite.h"
-#include <qdebug.h>
-#include <qlogging.h>
 #include "include/FFTProcessor.h"
 #include "include/AudioFileParse.h"
+#include <qdebug.h>
+#include <qlogging.h>
+#include <string>
+#include <filesystem>
 
 
 Backend::SamplerInfinite::SamplerInfinite()
@@ -20,7 +22,8 @@ Backend::SamplerInfinite::SamplerInfinite()
 
 Backend::SamplerInfinite::~SamplerInfinite(){};
 
-void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap)
+void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
+    const std::map<double, std::string>& freqToNote)
 {
     qDebug("process :)\n");
     qDebug() << freqs << "\n";
@@ -43,7 +46,6 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
     qDebug("Arvjrifrjihrfiuht");
 
     std::string slicedFreq = freqsStr.substr(start);
-    qDebug() << "the otehr one:" << slicedFreq;
     if (!slicedFreq.empty())
         parts.push_back(freqMap.at(slicedFreq));
 
@@ -66,23 +68,27 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         parser.readAudioFileAsMono(song);
 
-        // make a size member
         int n = parser.size();
 
         int num_chunks = (n + config.chunkSize - 1) / config.chunkSize;
 
-        parser.applyHanningWindow();
+        // parser.applyHanningWindow();
 
         fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false);
 
+        // wtf do i do with you??? vvv
         const auto& chunks = fftProcessor.getMagnitudes();
 
         // wtf do i do with you??? vvv
         const std::vector<double>& audioCopy = parser.getAudioData();
 
-        qDebug() << "sample storage size: " << fftProcessor.getSampleStorage()[0].size() << "\n";
+        int i = 0;
         for (auto& [k, v] : fftProcessor.getSampleStorage()) {
-            parser.writeWavFile(v, "hahamuthafuckah.wav");
+            // this inner loop is terrible. could easily mismatch frequency to samples
+            std::filesystem::path dirPath = m_outputDirectory + '/' + freqToNote.at(parts[i]);
+            std::filesystem::create_directory(dirPath);
+            parser.writeWavFile(v, m_outputDirectory + '/' + freqToNote.at(parts[i]) + "/" + freqToNote.at(parts[i]) + ".wav");
+            i++;
         }
     }
 
@@ -91,6 +97,8 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 }
 
 void Backend::SamplerInfinite::setFreqStrength(double freqStrength) {m_freqStrength = freqStrength;}
+
+void Backend::SamplerInfinite::setOutputDirectory(std::string outputDirectory) {m_outputDirectory = outputDirectory;}
 
 
 
