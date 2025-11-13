@@ -206,7 +206,7 @@ color: rgb(0, 0, 0)</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_6"/>
     </widget>
-    <widget class="QSlider" name="horizontalSlider">
+    <widget class="QSlider" name="freqStrengthSlider">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -218,6 +218,15 @@ color: rgb(0, 0, 0)</string>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(0, 255, 0)
 </string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>

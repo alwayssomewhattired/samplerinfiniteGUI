@@ -60,7 +60,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
     for (const std::string& song : filePaths)
     {
 
-        FFTProcessor fftProcessor(config.chunkSize, config.sampleRate);
+        FFTProcessor fftProcessor(config.chunkSize, config.sampleRate, m_freqStrength);
 
         AudioFileParse parser;
 
@@ -90,6 +90,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
 }
 
+void Backend::SamplerInfinite::setFreqStrength(double freqStrength) {m_freqStrength = freqStrength;}
 
 
 

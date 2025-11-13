@@ -11,6 +11,8 @@ namespace Backend {
 
         void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap);
 
+        void setFreqStrength(double freqStrength);
+
 	private:
 		struct Config {
 			int chunkSize;
@@ -18,7 +20,8 @@ namespace Backend {
 			int channels;
 			int productDurationSamples;
 		};
-
 		Config config;
+
+        double m_freqStrength;
 	};
 }

@@ -57,6 +57,12 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
 
     });
 
+    auto* freqStrengthSlider = ui->freqStrengthSlider;
+
+    connect(freqStrengthSlider, &QSlider::sliderReleased, this, [this, freqStrengthSlider](){
+        m_backend.setFreqStrength(freqStrengthSlider->value() / 100.0);
+    });
+
 }
 
 SamplerInfinite::~SamplerInfinite()
