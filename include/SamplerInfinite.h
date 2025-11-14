@@ -10,7 +10,7 @@ namespace Backend {
 		~SamplerInfinite();
 
         void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
-            const std::map<double, std::string>& freqToNote, const bool& isAppend);
+            const std::map<double, std::string>& freqToNote, const bool& isAppend, const bool& isInterpolate);
 
         void setFreqStrength(double freqStrength);
 

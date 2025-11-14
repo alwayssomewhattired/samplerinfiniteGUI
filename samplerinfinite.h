@@ -27,6 +27,7 @@ private:
     Backend::SamplerInfinite m_backend;
     std::vector<std::string> filePaths;
     bool m_isAppend;
+    bool m_isInterpolate;
 
 
 };

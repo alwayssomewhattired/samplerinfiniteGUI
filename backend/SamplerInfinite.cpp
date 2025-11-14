@@ -24,7 +24,7 @@ Backend::SamplerInfinite::SamplerInfinite()
 Backend::SamplerInfinite::~SamplerInfinite(){};
 
 void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
-    const std::map<double, std::string>& freqToNote, const bool& isAppend)
+    const std::map<double, std::string>& freqToNote, const bool& isAppend, const bool& isInterpolate)
 {
     qDebug("process :)\n");
     qDebug() << freqs << "\n";
@@ -83,7 +83,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
         // this window is pointless vvv possibly make a control for it... possibly eat mushroom and think
         // parser.applyHanningWindow();
 
-        fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false);
+        fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false, isInterpolate);
 
         // wtf do i do with you??? vvv
         const auto& chunks = fftProcessor.getMagnitudes();
@@ -98,7 +98,10 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
             std::filesystem::create_directory(dirPath);
             // make a control that chooses an existing audio file to append new audio to
             // for now, make the choice automatically the 'appendage'.wav
-            std::string finalProductName = m_outputDirectory + '/' + freqToNote.at(parts[i]) + "/" + songName + freqToNote.at(parts[i]) + ".wav";
+            std::string freq = freqToNote.at(parts[i]);
+            std::string finalProductName = m_outputDirectory + '/' + freq + "/" + songName + "ohyah" + freq + ".wav";
+            qDebug() << "final product name : " << finalProductName << "\n";
+            qDebug() << "freq : " << freq << "\n";
             if (isAppend)
                 parser.appendWavFile(v, finalProductName);
             else

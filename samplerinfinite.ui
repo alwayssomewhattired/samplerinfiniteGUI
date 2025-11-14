@@ -399,6 +399,44 @@ color: rgb(0, 0, 0)</string>
      </layout>
     </widget>
    </widget>
+   <widget class="QWidget" name="InterpolateModeBase" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1540</x>
+      <y>400</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_11">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>111</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_11">
+      <item>
+       <widget class="QPushButton" name="InterpolateModeButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 85, 0)</string>
+        </property>
+        <property name="text">
+         <string>Interpolate</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
