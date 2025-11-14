@@ -28,6 +28,7 @@ private:
     std::vector<std::string> filePaths;
     bool m_isAppend;
     bool m_isInterpolate;
+    int m_chunkCrossfadeSamples;
 
 
 };

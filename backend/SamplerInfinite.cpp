@@ -25,7 +25,7 @@ Backend::SamplerInfinite::~SamplerInfinite(){};
 
 void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
     const std::map<double, std::string>& freqToNote, const std::map<int, std::string>& i_freqToNote,
-                                       const bool& isAppend, const bool& isInterpolate)
+                                       const bool& isAppend, const bool& isInterpolate, const int& crossfadeSamples)
 {
     qDebug("process :)\n");
     qDebug() << freqs << "\n";
@@ -75,7 +75,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
         // this window is pointless vvv possibly make a control for it... possibly eat mushroom and think
         // parser.applyHanningWindow();
 
-        fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false, isInterpolate);
+        fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, isInterpolate, crossfadeSamples);
 
         // wtf do i do with you??? vvv
         const auto& chunks = fftProcessor.getMagnitudes();

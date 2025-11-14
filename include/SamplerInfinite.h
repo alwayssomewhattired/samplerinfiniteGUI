@@ -11,7 +11,7 @@ namespace Backend {
 
         void process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
             const std::map<double, std::string>& freqToNote, const std::map<int, std::string>& i_freqToNote,
-                     const bool& isAppend, const bool& isInterpolate);
+                     const bool& isAppend, const bool& isInterpolate, const int& crossfadeSamples);
 
         void setFreqStrength(double freqStrength);
 

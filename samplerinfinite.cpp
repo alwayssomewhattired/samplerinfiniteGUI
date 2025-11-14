@@ -1,6 +1,7 @@
 #include "samplerinfinite.h"
 #include "./ui_samplerinfinite.h"
 #include "audiodropwidget.h"
+#include "poweroftwospinbox.h"
 #include "include/SamplerInfinite.h"
 #include <QScrollBar>
 #include <QFileDialog>
@@ -61,7 +62,7 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
 
     connect(startButton, &QPushButton::clicked, this, [this, freqDisplayWidget](){
         m_backend.process(freqDisplayWidget->toPlainText(), filePaths, m_frequencies.getterNoteToFreq(), m_frequencies.getFreqToNote(),
-        m_frequencies.get_i_freqToNote(), m_isAppend, m_isInterpolate);
+        m_frequencies.get_i_freqToNote(), m_isAppend, m_isInterpolate, m_chunkCrossfadeSamples);
 
     });
 
@@ -117,6 +118,12 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
         } else {
             m_isInterpolate = true;
         }
+    });
+
+    auto* chunkCrossfadeSpinBox = ui->ChunkCrossfadeSpinBox;
+
+    connect(chunkCrossfadeSpinBox, &QSpinBox::valueChanged, this, [this, chunkCrossfadeSpinBox](){
+        m_chunkCrossfadeSamples = chunkCrossfadeSpinBox->value();
     });
 
 }

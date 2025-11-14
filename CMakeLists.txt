@@ -36,6 +36,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         include/FFTProcessor.h
         backend/AudioFileParse.cpp
         include/AudioFileParse.h
+        poweroftwospinbox.h poweroftwospinbox.cpp
 
 
 
