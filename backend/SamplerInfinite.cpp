@@ -6,6 +6,7 @@
 #include <qlogging.h>
 #include <string>
 #include <filesystem>
+#include <regex>
 
 
 Backend::SamplerInfinite::SamplerInfinite()
@@ -23,10 +24,11 @@ Backend::SamplerInfinite::SamplerInfinite()
 Backend::SamplerInfinite::~SamplerInfinite(){};
 
 void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
-    const std::map<double, std::string>& freqToNote)
+    const std::map<double, std::string>& freqToNote, const bool& isAppend)
 {
     qDebug("process :)\n");
     qDebug() << freqs << "\n";
+
 
     // frequency splitting logic in here... move to a utils at some point
     std::string freqsStr = freqs.toStdString();
@@ -62,6 +64,12 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
     for (const std::string& song : filePaths)
     {
 
+        std::filesystem::path p(song);
+        auto songName = p.stem().string();
+
+        if (isAppend)
+            songName = "appendage";
+
         FFTProcessor fftProcessor(config.chunkSize, config.sampleRate, m_freqStrength);
 
         AudioFileParse parser;
@@ -72,6 +80,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         int num_chunks = (n + config.chunkSize - 1) / config.chunkSize;
 
+        // this window is pointless vvv possibly make a control for it... possibly eat mushroom and think
         // parser.applyHanningWindow();
 
         fftProcessor.compute(parser.getAudioData(), parts, config.productDurationSamples, false);
@@ -84,10 +93,16 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         int i = 0;
         for (auto& [k, v] : fftProcessor.getSampleStorage()) {
-            // this inner loop is terrible. could easily mismatch frequency to samples
+            // this inner loop is terrible. could easily mismatch frequency to samples vvv
             std::filesystem::path dirPath = m_outputDirectory + '/' + freqToNote.at(parts[i]);
             std::filesystem::create_directory(dirPath);
-            parser.writeWavFile(v, m_outputDirectory + '/' + freqToNote.at(parts[i]) + "/" + freqToNote.at(parts[i]) + ".wav");
+            // make a control that chooses an existing audio file to append new audio to
+            // for now, make the choice automatically the 'appendage'.wav
+            std::string finalProductName = m_outputDirectory + '/' + freqToNote.at(parts[i]) + "/" + songName + freqToNote.at(parts[i]) + ".wav";
+            if (isAppend)
+                parser.appendWavFile(v, finalProductName);
+            else
+                parser.writeWavFile(v, finalProductName);
             i++;
         }
     }

@@ -60,7 +60,8 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
     auto *startButton = ui->startButton;
 
     connect(startButton, &QPushButton::clicked, this, [this, freqDisplayWidget](){
-        m_backend.process(freqDisplayWidget->toPlainText(), filePaths, m_frequencies.getterNoteToFreq(), m_frequencies.getFreqToNote());
+        m_backend.process(freqDisplayWidget->toPlainText(), filePaths, m_frequencies.getterNoteToFreq(), m_frequencies.getFreqToNote(),
+        m_isAppend);
 
     });
 
@@ -87,6 +88,21 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
             m_backend.setOutputDirectory(dir.toStdString());
         }
 
+    });
+
+    auto* appendModeButton = ui->AppendModeButton;
+    appendModeButton->setStyleSheet(
+        "QPushButton { background-color: rgb(0, 85, 0); }"
+        "QPushButton::checked { background-color: rgb(0, 255, 0); }"
+        );
+
+    connect(appendModeButton, &QPushButton::clicked, this, [this](){
+        if (m_isAppend)
+            {
+            m_isAppend = false;
+        }
+        else
+            m_isAppend = true;
     });
 
 }

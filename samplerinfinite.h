@@ -26,6 +26,8 @@ private:
     Frequencies m_frequencies;
     Backend::SamplerInfinite m_backend;
     std::vector<std::string> filePaths;
+    bool m_isAppend;
+
 
 };
 #endif // SAMPLERINFINITE_H
