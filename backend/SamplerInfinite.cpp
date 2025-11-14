@@ -24,7 +24,8 @@ Backend::SamplerInfinite::SamplerInfinite()
 Backend::SamplerInfinite::~SamplerInfinite(){};
 
 void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<std::string>& filePaths, const std::map<std::string, double>& freqMap,
-    const std::map<double, std::string>& freqToNote, const bool& isAppend, const bool& isInterpolate)
+    const std::map<double, std::string>& freqToNote, const std::map<int, std::string>& i_freqToNote,
+                                       const bool& isAppend, const bool& isInterpolate)
 {
     qDebug("process :)\n");
     qDebug() << freqs << "\n";
@@ -45,19 +46,10 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
         start = end + 2;
 
     }
-    qDebug("Arvjrifrjihrfiuht");
 
     std::string slicedFreq = freqsStr.substr(start);
     if (!slicedFreq.empty())
         parts.push_back(freqMap.at(slicedFreq));
-
-    // parts is now the stringified-split version of freq as a vector
-    // convert to double using map as lookup
-
-    for (double& ffreq : parts)
-    {
-        qDebug() << "frequency: " << ffreq;
-    }
 
 
     // 1. each song
@@ -93,12 +85,14 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
 
         int i = 0;
         for (auto& [k, v] : fftProcessor.getSampleStorage()) {
+            // std::string freq = freqToNote.at(parts[i]);
+            std::string freq = i_freqToNote.at(k);
             // this inner loop is terrible. could easily mismatch frequency to samples vvv
-            std::filesystem::path dirPath = m_outputDirectory + '/' + freqToNote.at(parts[i]);
+            // std::filesystem::path dirPath = m_outputDirectory + '/' + freq;
+            std::filesystem::path dirPath = m_outputDirectory + '/' + freq;
             std::filesystem::create_directory(dirPath);
             // make a control that chooses an existing audio file to append new audio to
             // for now, make the choice automatically the 'appendage'.wav
-            std::string freq = freqToNote.at(parts[i]);
             std::string finalProductName = m_outputDirectory + '/' + freq + "/" + songName + "ohyah" + freq + ".wav";
             qDebug() << "final product name : " << finalProductName << "\n";
             qDebug() << "freq : " << freq << "\n";

@@ -61,7 +61,7 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
 
     connect(startButton, &QPushButton::clicked, this, [this, freqDisplayWidget](){
         m_backend.process(freqDisplayWidget->toPlainText(), filePaths, m_frequencies.getterNoteToFreq(), m_frequencies.getFreqToNote(),
-        m_isAppend, m_isInterpolate);
+        m_frequencies.get_i_freqToNote(), m_isAppend, m_isInterpolate);
 
     });
 
