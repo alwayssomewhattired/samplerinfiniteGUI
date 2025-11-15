@@ -22,7 +22,6 @@ SamplerInfinite::SamplerInfinite(QWidget *parent)
 
     connect(dropWidget, &AudioDropWidget::audioDropped, this, [&](const QString &filePath){
         qDebug() << "file dropped: " << filePath;
-
         QTextCharFormat format;
         format.setForeground(Qt::green);
 

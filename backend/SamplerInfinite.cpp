@@ -55,7 +55,7 @@ void Backend::SamplerInfinite::process(const QString& freqs, const std::vector<s
     // 1. each song
     for (const std::string& song : filePaths)
     {
-
+        qDebug() << "filenamezzzz: " << song << "\n";
         std::filesystem::path p(song);
         auto songName = p.stem().string();
 

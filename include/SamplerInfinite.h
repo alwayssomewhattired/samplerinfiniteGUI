@@ -26,7 +26,7 @@ namespace Backend {
 		};
 		Config config;
 
-        double m_freqStrength;
+        double m_freqStrength{1.0};
         std::string m_outputDirectory;
 	};
 }
